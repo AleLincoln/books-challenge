@@ -21,3 +21,9 @@ li {
 .red {
     color: red;
 }
+
+.searchbar button{
+    display: flex;
+    height: 300px;
+    background: black;
+}
