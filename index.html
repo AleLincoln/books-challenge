@@ -15,9 +15,9 @@
             <input type="text" id="author" placeholder="Author">
             <input type="text" id="title" placeholder="title">
             <input type="text" id="publisher" placeholder="Publisher">
-            <button onclick="searchBook()">Seach</button>
+            <button id="">Seach</button>
 
-            <div id="res"></div>
+            <div id="search"></div>
     </div>
 
     <div id="test">
@@ -62,11 +62,11 @@
             }
             
             document.addEventListener("DOMContentLoaded", function(){
-            document.getElementById("res").addEventListener("click", () => {
+            document.getElementById("search").addEventListener("click", () => {
                 let url = "./api?"
                 let author = document.getElementById("author").value
                 let title = document.getElementById("title").value
-                let pub = document.getElementById("pub").value
+                let pub = document.getElementById("publisher").value
                 if(author){
                     url += "author=" + author + "&"
                 }
