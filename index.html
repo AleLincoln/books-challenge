@@ -12,7 +12,9 @@
 <body>
     <div class="searchbar">
         <h1>Search your books</h1>
-            <input type="text" id="searchform">
+            <input type="text" id="author" placeholder="Author">
+            <input type="text" id="title" placeholder="title">
+            <input type="text" id="publisher" placeholder="Publisher">
             <button onclick="searchBook()">Seach</button>
 
             <div id="res"></div>
@@ -28,6 +30,7 @@
 
     <script>
         let loadBooks = (myjson) => {
+            document.getElementById("test").innerHTML = ""
             myjson.forEach(element => {
                 let li = document.createElement("li");
                 let author = document.createElement("h4")
@@ -58,10 +61,25 @@
                 })
             }
             
-        document.addEventListener("DOMContentLoaded", function(){
-            callServer()
-        })
-
+            document.addEventListener("DOMContentLoaded", function(){
+            document.getElementById("res").addEventListener("click", () => {
+                let url = "./api?"
+                let author = document.getElementById("author").value
+                let title = document.getElementById("title").value
+                let pub = document.getElementById("pub").value
+                if(author){
+                    url += "author=" + author + "&"
+                }
+                if (title){
+                    url += "title=" + title + "&"
+                }
+                if (pub){
+                    url += "publisher=" + pub
+                }
+                callServer(url)
+            }, false)
+            callServer("/api");
+});
         
 
         
