@@ -15,9 +15,9 @@
             <input type="text" id="author" placeholder="Author">
             <input type="text" id="title" placeholder="title">
             <input type="text" id="publisher" placeholder="Publisher">
-            <button id="search">Seach</button>
+            <button id="search">Search</button>
 
-            <div id="search"></div>
+            <div id="res"></div>
     </div>
 
     <div id="test">
@@ -29,24 +29,28 @@
     
 
     <script>
+         
         let loadBooks = (myjson) => {
             document.getElementById("test").innerHTML = ""
             myjson.forEach(element => {
+                
                 let li = document.createElement("li");
                 let author = document.createElement("h4")
                     author.innerHTML = `${element.author}`
                 let title = document.createElement("p");
                     title.innerHTML = `${element.title}`
-                let pages = document.createElement("p")
-                    pages.innerHTML = `Pages: ${element.pages}`
+                let publisher = document.createElement("p")
+                    publisher.innerHTML = `${element.publisher}`
                 
 
                 li.appendChild(author)
                 li.appendChild(title)
-                li.appendChild(pages)
+                li.appendChild(publisher)
+               
 
                 document.getElementById("test").appendChild(li)
             });
+                      
         } 
 
         function callServer(){
