@@ -13,7 +13,9 @@
     <title>Document</title>
 </head>
 <body>
-        
+    <div id="loaderdiv">
+        <img src="Ring-Preloader.gif" alt="">
+    </div>
     <div class="searchbar">
         <h1>Search your books</h1>
             <input type="text" id="author" placeholder="Author">
@@ -21,9 +23,8 @@
             <input type="text" id="publisher" placeholder="Publisher">
             <button id="search">Search</button>
 
-            <div id="loaderdiv">
-                    <img src="Ring-Preloader.gif" alt="">
-                </div>
+            <div id="res"></div>
+    </div>
 
     <div id="test">
         
@@ -78,9 +79,9 @@
 
             });
             
-            
- 
-});
+            let itens = document.querySelectorAll("li")
+                Array.from(itens)
+                console.log(itens.length)
             
                
             
@@ -101,8 +102,6 @@
             
             document.addEventListener("DOMContentLoaded", function(){
             document.getElementById("search").addEventListener("click", () => {
-            
-
                 let url = "./api?"
                 let author = document.getElementById("author").value
                 let title = document.getElementById("title").value

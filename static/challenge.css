@@ -40,6 +40,9 @@ li {
     width: 700px;
     border-radius: 3em;
 }
-.spinner-border{
-    visibility: hidden;
+
+#loaderdiv{
+    width: 100%;
+    height: 100vh;
+    
 }
