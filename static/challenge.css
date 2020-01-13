@@ -40,3 +40,6 @@ li {
     width: 700px;
     border-radius: 3em;
 }
+.spinner-border{
+    visibility: hidden;
+}
