@@ -67,10 +67,13 @@
 })*/
          
         let loadBooks = (myjson) => {
-            let arr = []
+
+            let firstPosition = 0
+            let lastPosition = 19
+            let arr = myjson.split(firstPosition * 5, arr+5)
            document.getElementById("test").innerHTML = ""
             myjson.forEach(element => {
-                if(myjson.length < 5){
+                
 
                 let li = document.createElement("li");
                 let author = document.createElement("h4")
@@ -84,10 +87,10 @@
                 li.appendChild(title)
                 li.appendChild(publisher)
                 
-               
+                console.log(arr)
 
                 document.getElementById("test").appendChild(li)
-                }
+                
             });
         } 
 
