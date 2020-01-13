@@ -68,9 +68,9 @@
          
         let loadBooks = (myjson) => {
 
-            let firstPosition = 0
-            let lastPosition = 19
-            let arr = myjson.split(firstPosition * 5, arr+5)
+           // let firstPosition = 0
+           // let lastPosition = 19
+           // let arr = myjson.split(firstPosition * 5, arr+5)
            document.getElementById("test").innerHTML = ""
             myjson.forEach(element => {
                 
@@ -87,7 +87,7 @@
                 li.appendChild(title)
                 li.appendChild(publisher)
                 
-                console.log(arr)
+               // console.log(arr)
 
                 document.getElementById("test").appendChild(li)
                 
