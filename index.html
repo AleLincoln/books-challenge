@@ -13,8 +13,8 @@
     <title>Document</title>
 </head>
 <body>
-        <div class="spinner-border text-dark" role="status">
-                <span class="sr-only">Loading...</span>
+        <div class="spinner-border text-dark" role="status" id="div-loader">
+                <span class="sr-only" id="loader">Loading...</span>
         </div>
     <div class="searchbar">
         <h1>Search your books</h1>
@@ -102,6 +102,8 @@
             
             document.addEventListener("DOMContentLoaded", function(){
             document.getElementById("search").addEventListener("click", () => {
+            
+
                 let url = "./api?"
                 let author = document.getElementById("author").value
                 let title = document.getElementById("title").value
