@@ -24,6 +24,12 @@
         
 
     </div>
+    <div class="paginador">
+        <a href="">Anterior</a>
+        <a href="">Próximo</a>
+
+        
+    </div>
     
     
     
@@ -31,7 +37,8 @@
     <script>
          
         let loadBooks = (myjson) => {
-            document.getElementById("test").innerHTML = ""
+            console.log(myjson)
+           document.getElementById("test").innerHTML = ""
             myjson.forEach(element => {
                 
                 let li = document.createElement("li");
@@ -49,12 +56,12 @@
                
 
                 document.getElementById("test").appendChild(li)
+
             });
                       
         } 
 
-        function callServer(){
-        const url = "./api"
+        function callServer(url = "./api"){
 
         fetch(url)
             .then(function(response){
@@ -80,10 +87,26 @@
                 if (pub){
                     url += "publisher=" + pub
                 }
+                console.log(url)
                 callServer(url)
             }, false)
             callServer("/api");
 });
+
+        function goToPage(itens, pageActual, limitItens){
+            let result = []
+            return result
+
+            let totalPage = Math.ceil(itens.length / limitItens)
+
+            let count = (pageActual*limitItens) -limitItens
+
+            let delimiter = count + limitItens
+
+            if(pageActual <= totalPage){
+                for(let = count; i<delimiter; i++)
+            }
+        }
         
 
         
