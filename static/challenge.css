@@ -33,12 +33,14 @@ li {
 }
 .searchbar button{
     margin: 5px;
-    width: 10%;
+    width: 100px;
     border-radius: 3em;
 }
 .searchbar input{
     width: 700px;
     border-radius: 3em;
+    margin: 5px;
+    text-align: center;
 }
 #test{
     display: flex;
@@ -50,6 +52,7 @@ li {
     margin: 10px;
     text-align: center;
     border-bottom: solid 2px black;
+    list-style: none;
 }
 
 #loaderdiv{
@@ -61,4 +64,5 @@ li {
 }
 .pagination{
     justify-content: center;
+    margin-top: 20px;
 }

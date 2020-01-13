@@ -52,19 +52,26 @@
        let img = document.createElement("img")
        img.setAttribute("src", "static/Ring-Preloader.gif")
        document.getElementById("test").appendChild(img)
-   }
-
-    function paginar(){
-            let dados = loadBooks()
-                console.log(loadBooks)
-        }
-      
+   } 
+   
+  /* $('#demo').pagination({
+    dataSource: [1, 2, 3, 4, 5, 6, 7],
+    pageSize: 5,
+    showNavigator: true,
+    formatNavigator: '<span style="color: #f00"><%= currentPage %></span> st/rd/th, <%= totalPage %> pages, <%= totalNumber %> entries',
+    callback: function(data, pagination) {
+        // template method of yourself
+        var html = template(data);
+        dataContainer.html(html);
+    }
+})*/
          
         let loadBooks = (myjson) => {
-            
+            let arr = []
            document.getElementById("test").innerHTML = ""
             myjson.forEach(element => {
-                
+                if(myjson.length < 5){
+
                 let li = document.createElement("li");
                 let author = document.createElement("h4")
                     author.innerHTML = `${element.author}`
@@ -77,16 +84,11 @@
                 li.appendChild(title)
                 li.appendChild(publisher)
                 
-               let ul = document.createElement("ul")
-               ul.appendChild(li)
+               
 
-                document.getElementById("test").appendChild(ul)
-                
-                let itens = Array.from(li)
-                
-                
-                
-            });   
+                document.getElementById("test").appendChild(li)
+                }
+            });
         } 
 
         function callServer(url = "./api"){
