@@ -13,9 +13,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="loaderdiv">
-        <img src="Ring-Preloader.gif" alt="">
-    </div>
+    
     <div class="searchbar">
         <h1>Search your books</h1>
             <input type="text" id="author" placeholder="Author">
@@ -25,9 +23,8 @@
 
             <div id="res"></div>
     </div>
-
+   
     <div id="test">
-        
 
     </div>
     <nav aria-label="Page navigation example">
@@ -44,6 +41,16 @@
     
 
     <script>
+    var carr;
+    function tempoLoader(){
+        carr = setTimeout(carregarLoader, 200)
+    }
+
+   function carregarLoader(){
+       let img = document.createElement("img")
+       img.setAttribute("src", "static/Ring-Preloader.gif")
+       document.getElementById("test").appendChild(img)
+   }
 
     function paginar(){
             let dados = loadBooks()
@@ -69,24 +76,17 @@
                 li.appendChild(author)
                 li.appendChild(title)
                 li.appendChild(publisher)
-               
-               
+                
+               let ul = document.createElement("ul")
+               ul.appendChild(li)
 
-                document.getElementById("test").appendChild(li)
+                document.getElementById("test").appendChild(ul)
+                
                 
 
                 
 
-            });
-            
-            let itens = document.querySelectorAll("li")
-                Array.from(itens)
-                console.log(itens.length)
-            
-               
-            
-            
-            
+            });      
         } 
 
         function callServer(url = "./api"){
@@ -118,7 +118,10 @@
 
                 callServer(url)
             }, false)
-            callServer("/api");
+            carregarLoader()
+            setTimeout(function(){
+                callServer("/api")
+            }, 3000);
 });
 
     
