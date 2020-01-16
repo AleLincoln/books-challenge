@@ -27,17 +27,7 @@
     <div id="test">
 
     </div>
-    <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              
-            </ul>
-          </nav>
+   
     
     
     
@@ -58,14 +48,17 @@
             let rows = 5;
         
 
-         
      let loadBooks = (myjson) => {
-            let li;
-           document.getElementById("test").innerHTML = ""
+            
+            let ul = document.createElement("ul")
+            const pagination = []
+            let container = document.getElementById("test")
+
+                container.innerHTML = ""
             myjson.forEach(element => {
                 
 
-                li = document.createElement("li");
+                let li = document.createElement("li");
                 let author = document.createElement("h4")
                     author.innerHTML = `${element.author}`
                 let title = document.createElement("p");
@@ -77,11 +70,53 @@
                 li.appendChild(title)
                 li.appendChild(publisher)
 
-                document.getElementById("test").appendChild(li)
+                ul.appendChild(li)
+
+                if(ul.querySelectorAll("li").length === 5){
+                    pagination.push(ul)
+                    ul = document.createElement("ul")
+                }
                 
             });
 
+            if(ul.querySelectorAll("li").length > 0){
+                pagination.push(ul)
+            }
+            console.log(pagination)
 
+            let number_of_pages = pagination.length;
+            let pagination_list = document.createElement("ul")
+                pagination_list.classList.add("pagination")
+            
+            
+           for(let i = 0; i < number_of_pages; i++){
+           
+                let n_page = document.createElement("li")
+                n_page.classList.add("page-link")
+                n_page.innerHTML = i+1;
+
+                n_page.addEventListener("click", function(){
+                    container.textContent = ""
+                    container.appendChild(pagination[i])
+                    
+                    pagination_list.appendChild(n_page)
+                    document.getElementById("test").appendChild(pagination_list)
+                })
+                
+               
+
+                if(pagination.length > 0){
+                    container.appendChild(pagination[0])
+                }
+                else{
+                    container.innerHTML = "<p class='no_results'> Noresults for your search!</p>"
+                }
+                    pagination_list.appendChild(n_page)
+                    document.getElementById("test").appendChild(pagination_list)
+                
+            }
+            
+               
             
            
         }
