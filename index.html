@@ -28,7 +28,7 @@
 
     </div>
    
-    
+        <ul id="pagination"></ul>
     
     
 
@@ -85,7 +85,7 @@
             console.log(pagination)
 
             let number_of_pages = pagination.length;
-            let pagination_list = document.createElement("ul")
+            let pagination_list = document.getElementById("pagination")
                 pagination_list.classList.add("pagination")
             
             
@@ -93,17 +93,15 @@
            
                 let n_page = document.createElement("li")
                 n_page.classList.add("page-link")
-                n_page.innerHTML = i+1;
+                n_page.innerHTML = i+1
 
                 n_page.addEventListener("click", function(){
                     container.textContent = ""
-                    container.appendChild(pagination[i])
-                    
-                    pagination_list.appendChild(n_page)
-                    document.getElementById("test").appendChild(pagination_list)
+                    container.appendChild(pagination[i]) 
                 })
+                    
+                pagination_list.appendChild(n_page)
                 
-               
 
                 if(pagination.length > 0){
                     container.appendChild(pagination[0])
@@ -111,8 +109,7 @@
                 else{
                     container.innerHTML = "<p class='no_results'> Noresults for your search!</p>"
                 }
-                    pagination_list.appendChild(n_page)
-                    document.getElementById("test").appendChild(pagination_list)
+                 
                 
             }
             
