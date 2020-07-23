@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="static/challenge.css" />
+    <script src="static/index.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="searchbar">
+        <h1>Search your books</h1>
+            <input type="text" id="author" placeholder="Author">
+            <input type="text" id="title" placeholder="title">
+            <input type="text" id="publisher" placeholder="Publisher">
+            <button id="search">Search</button>
+
+            <div id="res"></div>
+    </div>
+   
+    <div id="content">
+    </div>
+   
+        <ul id="pagination"></ul>
+    
+    
+
+    <script>
+    var carr;
+    function tempoLoader(){
+        carr = setTimeout(carregarLoader, 200)
+    }
+
+   function carregarLoader(){
+       let img = document.createElement("img")
+       img.setAttribute("src", "static/Ring-Preloader.gif")
+       document.getElementById("content").appendChild(img)
+   } 
+
+            let page = 1;
+            let rows = 5;
+        
+
+     let loadBooks = (myjson) => {
+            
+            let ul = document.createElement("ul")
+            const pagination = []
+            let container = document.getElementById("content")
+
+                container.innerHTML = ""
+            myjson.forEach(element => {
+                
+
+                let li = document.createElement("li");
+                let author = document.createElement("h4")
+                    author.innerHTML = `${element.author}`
+                let title = document.createElement("p");
+                    title.innerHTML = `${element.title}`
+                let publisher = document.createElement("p")
+                    publisher.innerHTML = `${element.publisher}`
+                
+                li.appendChild(author)
+                li.appendChild(title)
+                li.appendChild(publisher)
+
+                ul.appendChild(li)
+
+                if(ul.querySelectorAll("li").length === 5){
+                    pagination.push(ul)
+                    ul = document.createElement("ul")
+                }
+                
+            });
+
+            if(ul.querySelectorAll("li").length > 0){
+                pagination.push(ul)
+            }
+            console.log(pagination)
+
+            let number_of_pages = pagination.length;
+            let pagination_list = document.getElementById("pagination")
+                pagination_list.classList.add("pagination")
+            
+            
+           for(let i = 0; i < number_of_pages; i++){
+           
+                let n_page = document.createElement("li")
+                n_page.classList.add("page-link")
+                n_page.innerHTML = i+1
+
+                n_page.addEventListener("click", function(){
+                    container.textContent = ""
+                    container.appendChild(pagination[i]) 
+                })
+                    
+                pagination_list.appendChild(n_page)
+                
+
+                if(pagination.length > 0){
+                    container.appendChild(pagination[0])
+                }
+                else{
+                    container.innerHTML = "<p class='no_results'> Noresults for your search!</p>"
+                }
+                 
+                
+            }
+            
+               
+            
+           
+        }
+
+
+        function callServer(url = 'https://github.com/AleLincoln/books-challenge/blob/487c219c09b798d271e13a0f744ee7bf656febaf/database.js'){
+
+        fetch(url)
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(myjson){
+                loadBooks(myjson)
+                })
+            }
+            
+            document.addEventListener("DOMContentLoaded", function(){
+            document.getElementById("search").addEventListener("click", () => {
+                let url = "./api?"
+                let author = document.getElementById("author").value
+                let title = document.getElementById("title").value
+                let pub = document.getElementById("publisher").value
+                if(author){
+                    url += "author=" + author + "&"
+                }
+                if (title){
+                    url += "title=" + title + "&"
+                }
+                if (pub){
+                    url += "publisher=" + pub
+                }
+
+                callServer(url)
+            }, false)
+            carregarLoader()
+            setTimeout(function(){
+                callServer("/api")
+            }, 3000);
+});
+
+    
+
+       
+        
+        
+
+        
+
+   
+        
+    </script>
+</body>
+</html>
