@@ -1,7 +1,7 @@
 function loadBooks(myjson){
     const ul = document.createElement('ul');
 
-    myjson.foEach((item) => {
+    myjson.forEach((item) => {
         let li = document.createElement('li')
         let author = document.createElement('h4')
         author.innerHTML = item.author
